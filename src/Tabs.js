@@ -10,7 +10,7 @@ import Table from "./Table";
 import Buttons from "./Buttons";
 import SimpleMenu from "./SimpleMenu";
 
-import interactive from './Interactive'
+import interactive from "./Interactive";
 
 const IButton = interactive(Button);
 
@@ -59,9 +59,26 @@ class SimpleTabs extends React.Component {
         {value === 0 && (
           <TabContainer>
             <Table />
-            <IButton data-test="foo" variant="raised" className={classes.button}>
+            <IButton
+              data-test="foo"
+              variant="raised"
+              className={classes.button}
+            >
               Default
             </IButton>
+            <br />
+            {new Array(10).fill(0,0,10).map(() => (
+              <div>
+                <IButton
+                  data-test="foo"
+                  variant="raised"
+                  className={classes.button}
+                >
+                  Default
+                </IButton>
+                <div><div>1</div><div>2</div></div>
+              </div>
+            ))}
           </TabContainer>
         )}
         {value === 1 && (
