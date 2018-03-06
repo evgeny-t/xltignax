@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 
 import Tabs from './Tabs'
 
-import HUD from './HUD';
+import './HUD';
 
 const styles = {
   root: {
@@ -27,7 +27,6 @@ function SimpleAppBar(props) {
         </Toolbar>
       </AppBar>
       <Tabs />
-      <HUD />
     </div>
   );
 }
