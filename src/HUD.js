@@ -1,6 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+let clicks = new Map();
+
+document.addEventListener(
+  "click",
+  event => {
+    if (event.target.classList.contains("__X")) {
+      let key = event.target.dataset.trackingKey;
+      clicks.set(key, (clicks.get(key) || 0) + 1);
+    }
+  },
+  true
+);
+
 window.addEventListener("load", event => {
   let elements = new Set();
   let canvas = document.createElement("canvas");
@@ -34,9 +47,15 @@ function paint(ctx, elements) {
   elements.forEach(el => {
     let box = el.getBoundingClientRect();
     let { left, top, width, height } = box;
-    ctx.strokeStyle = "yellow";
+    let n = clicks.get(el.dataset.trackingKey) || 0;
+    let hsl = `hsl(${Math.max(250 - n * 10, 0)},100%,50%)`;
+    ctx.strokeStyle = hsl;
     ctx.lineWidth = 2;
     ctx.strokeRect(left, top, width, height);
+    let fontSize = 10;
+    ctx.font = `${fontSize}px`;
+    ctx.fillStyle = "blue";
+    ctx.fillText("" + n, left + width + 2, top + fontSize);
   });
 }
 
@@ -44,7 +63,6 @@ function observe(cb) {
   let added = new Set();
   let removed = new Set();
   let mo = new MutationObserver((records, self) => {
-    console.log("MutationObserver", records);
     for (let i = 0; i < records.length; ++i) {
       let an = records[i].addedNodes;
       for (let j = 0; j < an.length; ++j) {

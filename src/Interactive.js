@@ -5,8 +5,7 @@ export default function interactive(Component) {
   class Interactive extends React.Component {
     componentDidMount() {
       const el = ReactDOM.findDOMNode(this);
-      el.classList.add('__X');
-      // el.dataset.test = "098098";
+      el.classList.add("__X");
     }
     render() {
       return <Component {...this.props} />;

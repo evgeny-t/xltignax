@@ -60,6 +60,7 @@ class SimpleTabs extends React.Component {
           <TabContainer>
             <Table />
             <IButton
+              data-tracking-key={`button-0`}
               data-test="foo"
               variant="raised"
               className={classes.button}
@@ -67,9 +68,10 @@ class SimpleTabs extends React.Component {
               Default
             </IButton>
             <br />
-            {new Array(10).fill(0,0,10).map(() => (
+            {new Array(10).fill(0,0,10).map((_,i) => (
               <div>
                 <IButton
+                  data-tracking-key={`button-${i+1}`}
                   data-test="foo"
                   variant="raised"
                   className={classes.button}
